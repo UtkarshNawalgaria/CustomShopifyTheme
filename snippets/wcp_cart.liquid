@@ -239,12 +239,14 @@ reqJquery(function($){
               },window.wpd_checkout_redirect_delay);
             } else {
               wcpClearCart();
+              draftAPIRequestProcessing = false;
               window.location.href = "/checkout";               
             }
           }       
         }
       });
     } else {
+      draftAPIRequestProcessing = false;
       window.location = '/checkout';
     }
 
@@ -258,6 +260,7 @@ reqJquery(function($){
           if(response.status != 200 && tryCount < 5){
               setTimeout(function(){tryCount++; checkInvoiceAvailability(url,tryCount)},1000);
           }else{
+              draftAPIRequestProcessing = false;
               window.location.href = url;
           }        
       });    
